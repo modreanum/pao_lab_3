@@ -3,9 +3,12 @@ package smartercalculator;
 public record CalculationRequest(Object leftOperand, Object rightOperand, String operation) {
 
     public CalculationRequest(final Object leftOperand, final Object rightOperand, final String operation) {
+
         this.leftOperand = leftOperand;
         this.rightOperand = rightOperand;
         this.operation = operation;
+        if(getRequestType()==RequestType.Undefined)
+            throw new RuntimeException();
     }
  public String operation(){
         return this.operation;
@@ -15,6 +18,11 @@ public record CalculationRequest(Object leftOperand, Object rightOperand, String
  }
  public Object rightoperand(){
         return this.rightOperand;
+ }
+
+
+ public static CalculationRequest deepCopy(CalculationRequest other){
+        return new CalculationRequest(other.leftOperand,other.rightOperand, other.operation);
  }
     public RequestType getRequestType() {
 

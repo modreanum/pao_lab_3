@@ -2,17 +2,17 @@ package smartercalculator.calculatorResult;
 
 import smartercalculator.CalculationRequest;
 
- public record CalculationResult(CalculationRequest request) {
-    public CalculationRequest request(){
-        return this.request;
-    }
+ public abstract class CalculationResult {
+
+     private final CalculationRequest request;
+
 
     public CalculationResult(CalculationRequest request) {
-        this.request = request;
+        this.request =request;
     }
 
     public CalculationRequest getRequest() {
-        return request;
+        return CalculationRequest.deepCopy(request);
     }
     public abstract Object computeResult();
 }

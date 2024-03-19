@@ -1,16 +1,11 @@
 package task7;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Comparator;
-import java.util.Iterator;
-import java.util.List;
-import java.util.ListIterator;
-import java.util.Spliterator;
+import java.util.*;
 import java.util.function.Consumer;
 import java.util.function.IntFunction;
 import java.util.function.Predicate;
 import java.util.function.UnaryOperator;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class UniqueList<T> implements List<T> {
@@ -28,116 +23,132 @@ public class UniqueList<T> implements List<T> {
 
     @Override
     public int size() {
-        throw new UnsupportedOperationException();
+        return storage.size();
     }
 
     @Override
     public boolean isEmpty() {
-        throw new UnsupportedOperationException();
+        return storage.isEmpty();
     }
 
     @Override
     public boolean contains(Object o) {
-        throw new UnsupportedOperationException();
+        return storage.contains(o);
     }
 
     @Override
     public Iterator<T> iterator() {
-        throw new UnsupportedOperationException();
+        return storage.iterator();
     }
 
     @Override
     public Object[] toArray() {
-        throw new UnsupportedOperationException();
+        return storage.toArray();
     }
 
     @Override
     public <T1> T1[] toArray(T1[] a) {
-        throw new UnsupportedOperationException();
+        return storage.toArray(a);
     }
 
     @Override
     public boolean add(T t) {
-        throw new UnsupportedOperationException();
+        if (!this.contains(t))
+        {return storage.add(t);}
+        return false;
+
     }
 
     @Override
     public boolean remove(Object o) {
-        throw new UnsupportedOperationException();
+
+        return storage.remove(o);
+
     }
 
     @Override
     public boolean containsAll(Collection<?> c) {
-        throw new UnsupportedOperationException();
+
+        return storage.containsAll(c);
+
     }
 
     @Override
     public boolean addAll(Collection<? extends T> c) {
-        throw new UnsupportedOperationException();
+
+        return storage.addAll(c.stream().distinct().filter(e -> !storage.contains(e)).toList());
     }
 
     @Override
     public boolean addAll(int index, Collection<? extends T> c) {
-        throw new UnsupportedOperationException();
+        return storage.addAll(index,c.stream().distinct().filter(e -> !storage.contains(e)).toList());
     }
 
     @Override
     public boolean removeAll(Collection<?> c) {
-        throw new UnsupportedOperationException();
+        return storage.removeAll(c.stream().distinct().toList());
     }
 
     @Override
     public boolean retainAll(Collection<?> c) {
-        throw new UnsupportedOperationException();
+        return storage.retainAll(c);
     }
 
     @Override
     public void clear() {
-
+        storage.clear();
     }
 
     @Override
     public T get(int index) {
-        throw new UnsupportedOperationException();
+        return storage.get(index);
     }
 
     @Override
     public T set(int index, T element) {
-        throw new UnsupportedOperationException();
+        if (!storage.contains(element)) {
+            return storage.set(index, element);
+
+        }
+        return null;
     }
 
     @Override
     public void add(int index, T element) {
-        throw new UnsupportedOperationException();
+        if (!storage.contains(element)) {
+            storage.add(index, element);
+
+        }
+
     }
 
     @Override
     public T remove(int index) {
-        throw new UnsupportedOperationException();
+       return storage.remove(index);
     }
 
     @Override
     public int indexOf(Object o) {
-        throw new UnsupportedOperationException();
+       return storage.indexOf(o);
     }
 
     @Override
     public int lastIndexOf(Object o) {
-        throw new UnsupportedOperationException();
+       return storage.lastIndexOf(o);
     }
 
     @Override
     public ListIterator<T> listIterator() {
-        throw new UnsupportedOperationException();
+       return storage.listIterator();
     }
 
     @Override
     public ListIterator<T> listIterator(int index) {
-        throw new UnsupportedOperationException();
+        return storage.listIterator(index);
     }
 
     @Override
     public List<T> subList(int fromIndex, int toIndex) {
-        throw new UnsupportedOperationException();
+        return storage.subList(fromIndex,toIndex);
     }
 }

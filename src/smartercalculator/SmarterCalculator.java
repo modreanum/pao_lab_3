@@ -8,7 +8,7 @@ import smartercalculator.calculatorResult.IntegerCalculationResult;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class SmarterCalculator {
+public final class SmarterCalculator {
 
     public static List<CalculationResult> calculate(String[] args) {
         return InputConverter.mapRequests(args)
